@@ -1,0 +1,18 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "docker/Dockerfile",
+    "buildArgs": {
+      "ARG_UID": "1000",
+      "ARG_GID": "1000"
+    }
+  },
+  "deploy": {
+    "startCommand": "node /app/server/index.js",
+    "healthcheckPath": "/api/health",
+    "healthcheckTimeout": 120,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 3
+  }
+}
