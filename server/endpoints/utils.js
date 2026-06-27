@@ -262,12 +262,12 @@ function getDeploymentVersion() {
 }
 
 /**
- * Returns the user agent for the AnythingLLM deployment.
+ * Returns the user agent for the SkwirlsAI deployment.
  * @returns {string} The user agent.
  */
 function getAnythingLLMUserAgent() {
   const version = getDeploymentVersion() || "unknown";
-  return `AnythingLLM/${version}`;
+  return `SkwirlsAI/${version}`;
 }
 
 module.exports = {

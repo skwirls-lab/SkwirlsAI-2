@@ -55,22 +55,22 @@ export default {
     },
   },
   github: () => {
-    return "https://github.com/Mintplex-Labs/anything-llm";
+    return "https://github.com/skwirls-lab/SkwirlsAI-2";
   },
   discord: () => {
     return "https://discord.com/invite/6UyHPeGZAC";
   },
   docs: (path = "") => {
-    return `https://docs.anythingllm.com${path}`;
+    return `https://docs.skwirlsai.app${path}`;
   },
   chatModes: () => {
-    return "https://docs.anythingllm.com/features/chat-modes";
+    return "https://docs.skwirlsai.app/features/chat-modes";
   },
   mailToMintplex: () => {
-    return "mailto:team@mintplexlabs.com";
+    return "mailto:hello@skwirlsai.app";
   },
   hosting: () => {
-    return "https://my.mintplexlabs.com/aio-checkout?product=anythingllm";
+    return "https://skwirlsai.app/hosting";
   },
   workspace: {
     chat: (slug, options = {}) => {
@@ -209,7 +209,7 @@ export default {
     website: () => {
       return import.meta.env.DEV
         ? `http://localhost:5173`
-        : `https://hub.anythingllm.com`;
+        : `https://hub.skwirlsai.app`;
     },
     /**
      * View more items of a given type on the community hub.
