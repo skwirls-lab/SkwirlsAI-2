@@ -1,0 +1,29 @@
+{
+  "hubId": "skill-generator",
+  "name": "skill-generator",
+  "description": "Creates new agent skills from a natural language description. Generates the plugin manifest and handler code, then saves it to the skills directory. Use this when the user asks to create a new skill, tool, or capability.",
+  "active": true,
+  "examples": [
+    {
+      "prompt": "Create a skill that fetches weather data from an API",
+      "call": "{\"description\": \"A skill that fetches current weather data for a given city using a public weather API. Returns temperature, conditions, and humidity.\", \"name\": \"weather-fetcher\"}"
+    },
+    {
+      "prompt": "I need a skill that can calculate distances between two coordinates",
+      "call": "{\"description\": \"Calculates the distance between two GPS coordinates using the Haversine formula. Returns distance in kilometers.\", \"name\": \"distance-calculator\"}"
+    }
+  ],
+  "entrypoint": {
+    "params": {
+      "description": {
+        "type": "string",
+        "description": "A detailed description of what the new skill should do, including its purpose, inputs, and expected output."
+      },
+      "name": {
+        "type": "string",
+        "description": "A short slug name for the skill (e.g., 'weather-fetcher', 'distance-calculator'). Will be used as the folder name and tool identifier."
+      }
+    }
+  },
+  "setup_args": {}
+}

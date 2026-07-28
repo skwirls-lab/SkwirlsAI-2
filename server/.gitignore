@@ -14,6 +14,7 @@ storage/imports
 storage/anythingllm-fs/*
 storage/generated-files/*
 storage/plugins/agent-skills/*
+!storage/plugins/agent-skills/skill-generator/
 storage/plugins/agent-flows/*
 storage/plugins/office-extensions/*
 storage/plugins/anythingllm_mcp_servers.json
