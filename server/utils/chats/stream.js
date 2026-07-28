@@ -261,6 +261,7 @@ async function streamChatWithWorkspace(
     (await chatPrompt(workspace, user, {
       prompt: updatedMessage,
       rawHistory,
+      modelName: LLMConnector.model,
     }));
   const messages = await LLMConnector.compressMessages(
     {

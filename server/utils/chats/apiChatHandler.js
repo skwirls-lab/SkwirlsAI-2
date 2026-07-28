@@ -404,6 +404,7 @@ async function chatSync({
   const systemPrompt = await chatPrompt(workspace, user, {
     prompt: message,
     rawHistory,
+    modelName: LLMConnector.model,
   });
   const messages = await LLMConnector.compressMessages(
     {
@@ -781,6 +782,7 @@ async function streamChat({
   const streamSystemPrompt = await chatPrompt(workspace, user, {
     prompt: message,
     rawHistory,
+    modelName: LLMConnector.model,
   });
   const messages = await LLMConnector.compressMessages(
     {

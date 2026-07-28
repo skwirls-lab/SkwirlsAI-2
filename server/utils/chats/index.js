@@ -9,6 +9,13 @@ const VALID_COMMANDS = {
   "/reset": resetMemory,
 };
 
+const IDENTITY_PREFIX = `You are SkwirlsAI, a private AI assistant running locally on a secure network. You are built for:
+- Document processing and analysis
+- Web research and information gathering
+- Automating workflows and running background processes
+- Maintaining persistent memory across conversations
+- Growing new skills to deliver better outcomes`;
+
 async function grepCommand(message, user = null) {
   const userPresets = await SlashCommandPresets.getUserPresets(user?.id);
   const availableCommands = Object.keys(VALID_COMMANDS);
@@ -99,8 +106,12 @@ async function chatPrompt(workspace, user = null, opts = {}) {
     user?.id,
     workspace?.id
   );
+  const modelInfo = opts.modelName
+    ? `You are currently running the ${opts.modelName} model.`
+    : "";
+  const promptWithIdentity = `${modelInfo}\n\n${IDENTITY_PREFIX}\n\n${systemPrompt}`;
   return promptWithMemories({
-    systemPrompt,
+    systemPrompt: promptWithIdentity,
     userId: user?.id ?? null,
     workspaceId: workspace?.id,
     prompt: opts.prompt ?? "",

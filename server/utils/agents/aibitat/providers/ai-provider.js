@@ -30,6 +30,13 @@ const { OllamaAILLM } = require("../../../AiProviders/ollama");
 const DEFAULT_WORKSPACE_PROMPT =
   "You are a helpful ai assistant who can assist the user and use tools available to help answer the users prompts and questions.";
 
+const IDENTITY_PREFIX = `You are SkwirlsAI, a private AI assistant running locally on a secure network. You are built for:
+- Document processing and analysis
+- Web research and information gathering
+- Automating workflows and running background processes
+- Maintaining persistent memory across conversations
+- Growing new skills to deliver better outcomes`;
+
 /**
  * @typedef {Object} ProviderUsageMetrics
  * @property {number} prompt_tokens - Number of tokens in the prompt/input
@@ -521,12 +528,41 @@ class Provider {
           user?.id || null,
           workspace.id
         );
+    const modelName =
+      workspace?.agentModel ||
+      Provider.#providerDefaultModel(provider) ||
+      null;
+    const modelInfo = modelName
+      ? `You are currently running the ${modelName} model.`
+      : "";
+    const promptWithIdentity = `${modelInfo}\n\n${IDENTITY_PREFIX}\n\n${basePrompt}`;
     return promptWithMemories({
-      systemPrompt: basePrompt,
+      systemPrompt: promptWithIdentity,
       userId: user?.id ?? null,
       workspaceId: workspace?.id,
       prompt,
     });
+  }
+
+  static #providerDefaultModel(provider) {
+    switch (provider) {
+      case "lmstudio":
+        return process.env.LMSTUDIO_MODEL_PREF || null;
+      case "openai":
+        return process.env.OPEN_MODEL_PREF || null;
+      case "anthropic":
+        return process.env.ANTHROPIC_MODEL_PREF || null;
+      case "ollama":
+        return process.env.OLLAMA_MODEL_PREF || null;
+      case "gemini":
+        return process.env.GEMINI_MODEL_PREF || null;
+      case "deepseek":
+        return process.env.DEEPSEEK_MODEL_PREF || null;
+      case "togetherai":
+        return process.env.TOGETHER_MODEL_PREF || null;
+      default:
+        return null;
+    }
   }
 
   /**
